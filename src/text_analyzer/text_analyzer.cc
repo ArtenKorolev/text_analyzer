@@ -20,7 +20,7 @@ auto TextAnalyzer::analyze_text() const -> TextData
 
 auto TextAnalyzer::_count_words() const -> std::uint32_t
 {
-    std::uint32_t words_number = 0;
+    std::uint32_t words_number{0};
 
     for (int i = 1; i < _text.size(); ++i)
     {
@@ -42,7 +42,7 @@ auto TextAnalyzer::_check_if_char_is_after_word(int char_index) const -> bool
 
 auto TextAnalyzer::_count_lines() const -> std::uint32_t
 {
-    std::uint32_t lines_number = 0;
+    std::uint32_t lines_number{0};
 
     for (const auto &symbol : _text)
     {
@@ -57,7 +57,7 @@ auto TextAnalyzer::_count_lines() const -> std::uint32_t
 
 auto TextAnalyzer::_count_characters() const -> std::uint32_t
 {
-    std::uint32_t characters_number = 0;
+    std::uint32_t characters_number{0};
 
     for (const auto &symbol : _text)
     {
