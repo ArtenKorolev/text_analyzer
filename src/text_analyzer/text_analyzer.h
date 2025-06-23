@@ -5,7 +5,9 @@
 
 struct TextData
 {
-    std::uint32_t words_number, characters_number, lines_counter;
+    [[nodiscard]] auto get_format_info() const -> std::string;
+
+    std::uint32_t words_number, characters_number, lines_number;
 };
 
 class TextAnalyzer
@@ -15,6 +17,11 @@ class TextAnalyzer
     [[nodiscard]] auto analyze_text() const -> TextData;
 
    private:
+    [[nodiscard]] auto _count_words() const -> std::uint32_t;
+    [[nodiscard]] auto _check_if_char_is_after_word(int char_index) const -> bool;
+    [[nodiscard]] auto _count_lines() const -> std::uint32_t;
+    [[nodiscard]] auto _count_characters() const -> std::uint32_t;
+
     std::string _text;
 };
 
