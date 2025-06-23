@@ -4,7 +4,7 @@
 
 auto TextData::get_format_info() const -> std::string
 {
-    return "Lines: " + std::to_string(lines_number) + ", Wrods: " + std::to_string(words_number) +
+    return "Lines: " + std::to_string(lines_number) + ", Words: " + std::to_string(words_number) +
            ", Characters: " + std::to_string(characters_number);
 }
 
