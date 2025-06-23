@@ -1,5 +1,5 @@
-#ifndef _FILE_ANALYZER_H_
-#define _FILE_ANALYZER_H_
+#ifndef _TEXT_ANALYZER_H_
+#define _TEXT_ANALYZER_H_
 
 #include <string>
 
@@ -25,4 +25,4 @@ class TextAnalyzer
     std::string _text;
 };
 
-#endif  // _FILE_ANALYZER_H_
+#endif  // _TEXT_ANALYZER_H_
