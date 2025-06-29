@@ -3,9 +3,9 @@
 
 #include <string>
 
-struct TextData
+struct TextStatistics
 {
-    [[nodiscard]] auto get_format_info() const -> std::string;
+    [[nodiscard]] auto get_in_printable_format() const -> std::string;
 
     std::uint32_t words_number, characters_number, lines_number;
 };
@@ -14,7 +14,7 @@ class TextAnalyzer
 {
    public:
     explicit TextAnalyzer(std::string text_to_analyze);
-    [[nodiscard]] auto analyze_text() const -> TextData;
+    [[nodiscard]] auto analyze_text() const -> TextStatistics;
 
    private:
     [[nodiscard]] auto _count_words() const -> std::uint32_t;

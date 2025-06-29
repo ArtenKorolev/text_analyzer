@@ -2,7 +2,7 @@
 
 #include <string>
 
-auto TextData::get_format_info() const -> std::string
+auto TextStatistics::get_in_printable_format() const -> std::string
 {
     return "Lines: " + std::to_string(lines_number) + ", Words: " + std::to_string(words_number) +
            ", Characters: " + std::to_string(characters_number);
@@ -12,10 +12,9 @@ TextAnalyzer::TextAnalyzer(std::string text_to_analyze) : _text{std::move(text_t
 {
 }
 
-auto TextAnalyzer::analyze_text() const -> TextData
+auto TextAnalyzer::analyze_text() const -> TextStatistics
 {
-    TextData text_data{_count_words(), _count_characters(), _count_lines()};
-    return text_data;
+    return {_count_words(), _count_characters(), _count_lines()};
 }
 
 auto TextAnalyzer::_count_words() const -> std::uint32_t

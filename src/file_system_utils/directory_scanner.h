@@ -13,6 +13,7 @@ class DirectoryScaner
 
    private:
     void _validate_path() const;
+
     std::filesystem::path _dir_path;
 };
 
