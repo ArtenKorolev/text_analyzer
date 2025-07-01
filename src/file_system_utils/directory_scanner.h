@@ -5,10 +5,10 @@
 #include <string>
 #include <vector>
 
-class DirectoryScaner
+class DirectoryScanner
 {
    public:
-    explicit DirectoryScaner(std::filesystem::path dir_path);
+    explicit DirectoryScanner(std::filesystem::path dir_path);
     [[nodiscard]] auto get_files() const -> std::vector<std::string>;
 
    private:

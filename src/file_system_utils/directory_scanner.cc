@@ -3,11 +3,11 @@
 #include <stdexcept>
 #include <vector>
 
-DirectoryScaner::DirectoryScaner(std::filesystem::path dir_path) : _dir_path{std::move(dir_path)}
+DirectoryScanner::DirectoryScanner(std::filesystem::path dir_path) : _dir_path{std::move(dir_path)}
 {
 }
 
-auto DirectoryScaner::get_files() const -> std::vector<std::string>
+auto DirectoryScanner::get_files() const -> std::vector<std::string>
 {
     _validate_path();
 
@@ -24,7 +24,7 @@ auto DirectoryScaner::get_files() const -> std::vector<std::string>
     return dir_content;
 }
 
-void DirectoryScaner::_validate_path() const
+void DirectoryScanner::_validate_path() const
 {
     if (!std::filesystem::exists(_dir_path) || !std::filesystem::is_directory(_dir_path))
     {
