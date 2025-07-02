@@ -1,5 +1,6 @@
 #include "text_analyzer.h"
 
+#include <cctype>
 #include <string>
 
 auto TextStatistics::get_in_printable_format() const -> std::string
@@ -21,22 +22,22 @@ auto TextAnalyzer::_count_words() const -> std::uint32_t
 {
     std::uint32_t words_number{0};
 
-    for (int i = 1; i < _text.size(); ++i)
+    bool in_word = false;
+
+    for (char symbol : _text)
     {
-        if (_check_if_char_is_after_word(i) ||
-            i == _text.size() - 1 && (std::isalnum(_text.at(i)) != 0))
+        if (std::isspace(symbol) != 0)
+        {
+            in_word = false;
+        }
+        else if (!in_word)
         {
             ++words_number;
+            in_word = true;
         }
     }
 
     return words_number;
-}
-
-auto TextAnalyzer::_check_if_char_is_after_word(int char_index) const -> bool
-{
-    return (_text.at(char_index) == ' ' || _text.at(char_index) == '\n') &&
-           (std::isalnum(_text.at(char_index - 1)) != 0);
 }
 
 auto TextAnalyzer::_count_lines() const -> std::uint32_t
@@ -56,15 +57,5 @@ auto TextAnalyzer::_count_lines() const -> std::uint32_t
 
 auto TextAnalyzer::_count_characters() const -> std::uint32_t
 {
-    std::uint32_t characters_number{0};
-
-    for (const auto &symbol : _text)
-    {
-        if (std::isalnum(symbol) != 0)
-        {
-            ++characters_number;
-        }
-    }
-
-    return characters_number;
+    return static_cast<std::uint32_t>(_text.size());
 }
