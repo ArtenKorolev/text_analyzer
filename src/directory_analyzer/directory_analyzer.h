@@ -11,7 +11,6 @@ class DirectoryAnalyzer
    public:
     explicit DirectoryAnalyzer(std::filesystem::path dir_path);
     [[nodiscard]] auto analyze_dir() const -> std::vector<FileStatistics>;
-    [[nodiscard]] auto analyze_dir_one_thread() const -> std::vector<FileStatistics>;
 
    private:
     std::filesystem::path _dir_path;
