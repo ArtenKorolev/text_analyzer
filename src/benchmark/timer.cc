@@ -44,6 +44,7 @@ auto Timer::formatted_elapsed_time() const -> std::string
     std::ostringstream oss;
     oss << std::fixed << std::setprecision(3);
 
+    // TODO: replace with constants instead of magic numbers
     if (duration_us >= 1'000'000)
     {
         double seconds = duration_us / 1'000'000.0;
