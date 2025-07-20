@@ -29,7 +29,7 @@ auto DirectoryAnalyzer::analyze_dir() const -> std::vector<FileStatistics>
     for (const auto &file : files)
     {
         threads.emplace_back(
-            [&file, &all_files_stats, &mtx]()
+            [&]()
             {
                 FileAnalyzer analyzer{file};
                 auto file_data{analyzer.analyze_file()};

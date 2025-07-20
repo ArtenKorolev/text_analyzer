@@ -10,6 +10,8 @@ file(GLOB CPP_SRC
     "src/file_system_utils/*.cc"
     "src/file_analyzer/*.cc"
     "src/directory_analyzer/*.cc"
+    "src/benchmark/*.cc"
+    "src/cli/*.cc"
 )
 
 include_directories(
@@ -18,9 +20,19 @@ include_directories(
     "src/file_analyzer"
     "src/directory_analyzer"
     "src/config"
+    "src/benchmark"
+    "src/cli"
 )
 
 add_executable(${PROJECT_NAME} ${CPP_SRC})
+
+# Добавляем дефайн в зависимости от конфигурации
+target_compile_definitions(${PROJECT_NAME} PRIVATE
+    $<$<CONFIG:Debug>:BUILD_DEBUG>
+    $<$<CONFIG:Release>:BUILD_RELEASE>
+    $<$<CONFIG:RelWithDebInfo>:BUILD_RELWITHDEBINFO>
+    $<$<CONFIG:MinSizeRel>:BUILD_MINSIZEREL>
+)
 
 # =============== TESTS ===============
 

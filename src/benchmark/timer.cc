@@ -37,27 +37,26 @@ auto Timer::elapsed_microseconds() const -> double
 
 auto Timer::formatted_elapsed_time() const -> std::string
 {
-    auto end_time = _running ? Clock::now() : _end_time;
-    auto duration_us =
-        std::chrono::duration_cast<std::chrono::microseconds>(end_time - _start_time).count();
-
     std::ostringstream oss;
     oss << std::fixed << std::setprecision(3);
 
-    // TODO: replace with constants instead of magic numbers
-    if (duration_us >= 1'000'000)
+    double seconds = elapsed_seconds();
+    if (seconds >= 1.0)
     {
-        double seconds = duration_us / 1'000'000.0;
         oss << seconds << " s";
-    }
-    else if (duration_us >= 1'000)
-    {
-        double milliseconds = duration_us / 1'000.0;
-        oss << milliseconds << " ms";
     }
     else
     {
-        oss << duration_us << " us";
+        double milliseconds = elapsed_milliseconds();
+        if (milliseconds >= 1.0)
+        {
+            oss << milliseconds << " ms";
+        }
+        else
+        {
+            double microseconds = elapsed_microseconds();
+            oss << microseconds << " us";
+        }
     }
 
     return oss.str();

@@ -1,7 +1,13 @@
 namespace config
 {
 
-constexpr auto DEBUG_MODE = true;
+const auto DEBUG =
+
+#ifdef BUILD_DEBUG
+    true;
+#elif defined(BUILD_RELEASE)
+    false;
+#endif
 
 constexpr auto DEFAULT_ANALYZE_PATH = ".";
 

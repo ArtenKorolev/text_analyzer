@@ -2,6 +2,8 @@
 
 #include "text_analyzer.h"
 
+// TODO: add more tests
+
 TEST(TextAnalyzerTest, NormalText)
 {
     TextAnalyzer analyzer{"Hello, world!\nHello, mom!"};

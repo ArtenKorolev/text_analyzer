@@ -10,8 +10,6 @@ DirectoryAnalyzerOneThread::DirectoryAnalyzerOneThread(std::filesystem::path dir
 
 auto DirectoryAnalyzerOneThread::analyze_dir() const -> std::vector<FileStatistics>
 {
-    static_assert(config::DEBUG, "This method can be used only in debug mode");
-
     auto files{DirectoryScanner(_dir_path).get_files()};
     std::vector<FileStatistics> all_files_stats;
     all_files_stats.reserve(files.size());
