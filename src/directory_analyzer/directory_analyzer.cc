@@ -4,7 +4,6 @@
 #include <thread>
 #include <vector>
 
-#include "config.h"
 #include "directory_scanner.h"
 #include "file_analyzer.h"
 

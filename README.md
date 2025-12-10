@@ -1,78 +1,62 @@
 # Multithreaded File Analyzer
 
- 📌Project Overview
+A multithreaded C++ tool for analyzing text files.
+It counts words, lines, and characters.
 
-Multithreaded File Analyzer is a high-performance C++ tool designed for efficient and scalable file content analysis.
-It leverages multithreading to process large datasets quickly, making it suitable for log analysis, data mining, or batch content processing on modern multi-core systems.
+---
 
-⸻
+# Performance
 
-🚀 Features
-	•	✅ Parallel File Processing: Automatically distributes workload across multiple threads.
-	•	✅ Thread-Safe Reporting: Aggregates results safely from multiple threads.
-	•	✅ Performance Optimized: Minimal synchronization overhead, making full use of CPU cores.
-	•	✅ Cross-Platform: Builds and runs on Linux, macOS, and Windows (tested with GCC, Clang, MSVC).
+This tool is designed to be high-performance and fully multithreaded. It processes
+each file in a separate thread, which increases performance. Also, it uses modern C++ features such as
+move semantics, RAII, the std::filesystem library, trailing types, auto, etc.
 
-⸻
+## Benchmarks
 
-⚙️ Build Instructions
+If you build this project in debug configuration, this tool will
+display the results of benchmarking both one thread and multithread versions
+instead of the actual analysis results, for example:
 
-Prerequisites
-	•	C++17 or higher
-	•	CMake 3.10+
-	•	Make / Ninja / Visual Studio (any CMake-supported build system)
+```text
+Analyzing directory: /bin
+Multithread version: 71.979 ms
+One thread version: 176.419 ms
+```
 
-Build (Linux/macOS/WSL):
+---
 
-git clone https://github.com/ArtenKorolev/text_analyzer.git
-cd text_analyzer
-mkdir build && cd build
-cmake ..
-make
-./file_analyzer [input_directory]
+# C++ Tooling
 
-Build (Windows with Visual Studio):
+This project uses *CMake* as meta build system, *clang-format* as code formatter and
+*clang-tidy* as static analyzer.
+---
 
-git clone https://github.com/ArtenKorolev/text_analyzer.git
-cd text_analyzer
-mkdir build
-cd build
-cmake .. -G "Visual Studio 17 2022"
+# Build
 
-Then open the generated .sln file and build the project.
+1) Clone git repo: `git clone https://github.com/ArtenKorolev/text_analyzer`
+2) Create bin folder: `mkdir bin; cd bin`
+3) Run CMake with your generator : `cmake .. -G<your generator>`
+4) Run your build system, for example: `make`
 
-⸻
+---
 
-🛠️ Usage
+# Usage
 
-./text_analyzer ./logs
+Using this tool is as simple as:
 
-Command-line Options:
+``` text
+./text_analyzer <input_directory>
+```
 
-Option	Description
-input_directory	Directory with files to analyze
+<input_directory> is the directory you want to analyze. This tool
+will traverse all the files in this directory and count words, lines and
+characters there, and then display them to you (in release configuration)
 
-⸻
+---
 
-✅ TODO / Future Improvements
-	•	Support for recursive directory traversal
-	•	File type filtering (e.g., .txt, .log)
-	•	Advanced reporting (JSON/CSV output)
-	•	Dynamic thread pool resizing
-	•	Unit tests with GoogleTest
+# Motivation
 
-⸻
-
-🤝 Contributing
-
-Contributions, bug reports, and suggestions are welcome!
-Feel free to open a pull request or submit an issue.
-
-⸻
-
-⭐️ Motivation
-
-This project was created as a learning exercise in multithreading, synchronization, and efficient file I/O handling in C++.
-It’s a great stepping stone towards more advanced system programming projects.
-
-⸻
+This project was created for learning purposes. First, I wanted to
+practice multithreaded programming in C++, synchronization primitives, and
+related concepts. Also, I wanted to practice skills in using modern C++ and
+improve my system programming skills.
