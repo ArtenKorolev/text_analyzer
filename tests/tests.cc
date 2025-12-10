@@ -2,16 +2,43 @@
 
 #include "text_analyzer.h"
 
-// TODO: add more tests
-
 TEST(TextAnalyzerTest, NormalText)
 {
-    TextAnalyzer analyzer{"Hello, world!\nHello, mom!"};
-    auto res = analyzer.analyze_text();
+    {
+        TextAnalyzer analyzer{"Hello, world!\nHello, mom!"};
+        auto res = analyzer.analyze_text();
 
-    EXPECT_EQ(res.characters_number, 25);
-    EXPECT_EQ(res.lines_number, 2);
-    EXPECT_EQ(res.words_number, 4);
+        EXPECT_EQ(res.characters_number, 25);
+        EXPECT_EQ(res.lines_number, 2);
+        EXPECT_EQ(res.words_number, 4);
+    }
+
+    {
+        TextAnalyzer analyzer{"Hello!_world\n"};
+        auto res = analyzer.analyze_text();
+
+        EXPECT_EQ(res.characters_number, 13);
+        EXPECT_EQ(res.lines_number, 2);
+        EXPECT_EQ(res.words_number, 1);
+    }
+
+    {
+        TextAnalyzer analyzer{"Hello, world!\nHello, mom!"};
+        auto res = analyzer.analyze_text();
+
+        EXPECT_EQ(res.characters_number, 25);
+        EXPECT_EQ(res.lines_number, 2);
+        EXPECT_EQ(res.words_number, 4);
+    }
+
+    {
+        TextAnalyzer analyzer{"Hello!_world\n"};
+        auto res = analyzer.analyze_text();
+
+        EXPECT_EQ(res.characters_number, 13);
+        EXPECT_EQ(res.lines_number, 2);
+        EXPECT_EQ(res.words_number, 1);
+    }
 }
 
 TEST(TextAnalyzerTest, EmptyText)

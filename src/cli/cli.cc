@@ -7,12 +7,14 @@
 #include "directory_analyzer_one_thread.h"
 #include "timer.h"
 
-void Cli::outputDirectoryAnalyzed(std::string directory_to_analyze)
+void Cli::analyzeDirectoryAndOutput(std::string directory_to_analyze)
 {
     DirectoryAnalyzer directory_analyzer{directory_to_analyze};
 
     if (config::DEBUG)
     {
+        std::cout << "Analyzing directory: " << directory_to_analyze << '\n';
+
         DirectoryAnalyzerOneThread directory_analyzer_debug{std::move(directory_to_analyze)};
 
         Timer benchmark_timer;

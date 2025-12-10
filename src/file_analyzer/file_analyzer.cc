@@ -15,6 +15,6 @@ auto FileStatistics::get_in_printable_format() const -> std::string
 auto FileAnalyzer::analyze_file() const -> FileStatistics
 {
     auto file_text{_file_reader.read()};
-    TextAnalyzer text_analyzer{std::move(file_text)};
+    const TextAnalyzer text_analyzer{std::move(file_text)};
     return {text_analyzer.analyze_text(), _file_path};
 }

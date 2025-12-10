@@ -5,7 +5,7 @@
 
 struct Cli
 {
-    static void outputDirectoryAnalyzed(std::string directory_to_analyze);
+    static void analyzeDirectoryAndOutput(std::string directory_to_analyze);
 };
 
 #endif  // _CLI_H_

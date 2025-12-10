@@ -18,7 +18,6 @@ class TextAnalyzer
 
    private:
     [[nodiscard]] auto _count_words() const -> std::uint32_t;
-    [[nodiscard]] static auto _does_char_belong_to_word(char symbol) -> bool;
     [[nodiscard]] auto _count_lines() const -> std::uint32_t;
     [[nodiscard]] auto _count_characters() const -> std::uint32_t;
 

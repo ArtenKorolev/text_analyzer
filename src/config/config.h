@@ -1,7 +1,10 @@
+#ifndef _CONFIG_H_
+#define _CONFIG_H_
+
 namespace config
 {
 
-const auto DEBUG =
+constexpr auto DEBUG =
 
 #ifdef BUILD_DEBUG
     true;
@@ -9,6 +12,8 @@ const auto DEBUG =
     false;
 #endif
 
-constexpr auto DEFAULT_ANALYZE_PATH = ".";
+constexpr auto DEFAULT_PATH_FOR_ANALYZING = ".";
 
 }  // namespace config
+
+#endif // _CONFIG_H_

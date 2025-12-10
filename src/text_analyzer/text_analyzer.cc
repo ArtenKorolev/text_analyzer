@@ -1,6 +1,5 @@
 #include "text_analyzer.h"
 
-#include <cctype>
 #include <string>
 
 auto TextStatistics::get_in_printable_format() const -> std::string
@@ -15,7 +14,9 @@ TextAnalyzer::TextAnalyzer(std::string text_to_analyze) : _text{std::move(text_t
 
 auto TextAnalyzer::analyze_text() const -> TextStatistics
 {
-    return {_count_words(), _count_characters(), _count_lines()};
+    return {.words_number = _count_words(),
+            .characters_number = _count_characters(),
+            .lines_number = _count_lines()};
 }
 
 auto TextAnalyzer::_count_words() const -> std::uint32_t
@@ -24,7 +25,7 @@ auto TextAnalyzer::_count_words() const -> std::uint32_t
 
     bool in_word = false;
 
-    for (char symbol : _text)
+    for (const char symbol : _text)
     {
         if (std::isspace(symbol) != 0)
         {
