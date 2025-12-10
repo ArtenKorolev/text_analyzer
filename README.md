@@ -29,13 +29,14 @@ One thread version: 176.419 ms
 
 This project uses *CMake* as meta build system, *clang-format* as code formatter and
 *clang-tidy* as static analyzer.
+
 ---
 
 # Build
 
 1) Clone git repo: `git clone https://github.com/ArtenKorolev/text_analyzer`
 2) Create bin folder: `mkdir bin; cd bin`
-3) Run CMake with your generator : `cmake .. -G<your generator>`
+3) Run CMake with your generator: `cmake .. -G<your generator>`
 4) Run your build system, for example: `make`
 
 ---
