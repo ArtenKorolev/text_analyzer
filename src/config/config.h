@@ -16,4 +16,4 @@ constexpr auto DEFAULT_PATH_FOR_ANALYZING = ".";
 
 }  // namespace config
 
-#endif // _CONFIG_H_
+#endif  // _CONFIG_H_

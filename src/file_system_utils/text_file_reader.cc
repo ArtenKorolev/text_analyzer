@@ -12,7 +12,7 @@ auto TextFileReader::read() const -> std::string
 {
     std::ifstream file_stream{_file_path};
 
-    if (!file_stream.is_open())
+    if (!file_stream.is_open()) [[unlikely]]
     {
         throw std::runtime_error("Unable to open file: " + _file_path.string());
     }

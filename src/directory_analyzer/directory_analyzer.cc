@@ -28,9 +28,9 @@ auto DirectoryAnalyzer::analyze_dir() const -> std::vector<FileStatistics>
     for (const auto &file : files)
     {
         threads.emplace_back(
-            [&]()
+            [&]() -> void
             {
-                FileAnalyzer analyzer{file};
+                const FileAnalyzer analyzer{file};
                 auto file_data{analyzer.analyze_file()};
 
                 std::lock_guard<std::mutex> guard{mtx};

@@ -5,7 +5,7 @@
 #include "cli.h"
 #include "config.h"
 
-auto main(int argc, char *argv[]) -> int
+auto main(const int argc, char *argv[]) -> int
 {
     try
     {
@@ -16,5 +16,8 @@ auto main(int argc, char *argv[]) -> int
     catch (const std::exception &e)
     {
         std::cerr << e.what() << '\n';
+        return EXIT_FAILURE;
     }
+
+    return EXIT_SUCCESS;
 }

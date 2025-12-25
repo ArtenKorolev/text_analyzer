@@ -1,6 +1,5 @@
 #include "directory_analyzer_one_thread.h"
 
-#include "config.h"
 #include "directory_scanner.h"
 
 DirectoryAnalyzerOneThread::DirectoryAnalyzerOneThread(std::filesystem::path dir_path)
@@ -10,7 +9,7 @@ DirectoryAnalyzerOneThread::DirectoryAnalyzerOneThread(std::filesystem::path dir
 
 auto DirectoryAnalyzerOneThread::analyze_dir() const -> std::vector<FileStatistics>
 {
-    auto files{DirectoryScanner(_dir_path).get_files()};
+    const auto files{DirectoryScanner(_dir_path).get_files()};
     std::vector<FileStatistics> all_files_stats;
     all_files_stats.reserve(files.size());
 
