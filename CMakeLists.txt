@@ -26,7 +26,6 @@ include_directories(
 
 add_executable(${PROJECT_NAME} ${CPP_SRC})
 
-# Добавляем дефайн в зависимости от конфигурации
 target_compile_definitions(${PROJECT_NAME} PRIVATE
     $<$<CONFIG:Debug>:BUILD_DEBUG>
     $<$<CONFIG:Release>:BUILD_RELEASE>

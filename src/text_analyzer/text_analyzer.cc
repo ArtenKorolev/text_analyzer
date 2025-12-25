@@ -14,20 +14,27 @@ TextAnalyzer::TextAnalyzer(std::string text_to_analyze) : _text{std::move(text_t
 
 auto TextAnalyzer::analyze_text() const -> TextStatistics
 {
-    return {.words_number = _count_words(),
-            .characters_number = _count_characters(),
-            .lines_number = _count_lines()};
-}
+    if (_text.empty())
+    {
+        return {.words_number = 0, .characters_number = 0, .lines_number = 0};
+    }
 
-auto TextAnalyzer::_count_words() const -> std::uint32_t
-{
+    constexpr auto START_LINES_NUMBER = 1;
+    std::uint32_t lines_number{START_LINES_NUMBER};
     std::uint32_t words_number{0};
 
-    bool in_word = false;
+    bool in_word{false};
 
-    for (const char symbol : _text)
+    for (std::size_t i = 0; i < _text.size(); ++i)
     {
-        if (std::isspace(symbol) != 0)
+        const char chr = _text.at(i);
+
+        if (_is_end_of_line(i))
+        {
+            ++lines_number;
+        }
+
+        if (_is_space(chr))
         {
             in_word = false;
         }
@@ -38,25 +45,27 @@ auto TextAnalyzer::_count_words() const -> std::uint32_t
         }
     }
 
-    return words_number;
+    return {.words_number = words_number,
+            .characters_number = static_cast<std::uint32_t>(_text.size()),
+            .lines_number = lines_number};
 }
 
-auto TextAnalyzer::_count_lines() const -> std::uint32_t
+auto TextAnalyzer::_is_end_of_line(const std::size_t charIndex) const -> bool
 {
-    std::uint32_t lines_number{0};
-
-    for (const auto &symbol : _text)
+    if (_text.at(charIndex) == '\n')
     {
-        if (symbol == '\n')
-        {
-            ++lines_number;
-        }
+        return true;
+    }
+    if (charIndex < _text.size() - 1 && _text.at(charIndex) == '\r' &&
+        _text.at(charIndex + 1) == '\n')
+    {
+        return true;
     }
 
-    return lines_number + 1;
+    return false;
 }
 
-auto TextAnalyzer::_count_characters() const -> std::uint32_t
+auto TextAnalyzer::_is_space(const char chr) -> bool
 {
-    return static_cast<std::uint32_t>(_text.size());
+    return chr == ' ' || chr == '\t' || chr == '\n';
 }

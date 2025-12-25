@@ -17,9 +17,8 @@ class TextAnalyzer
     [[nodiscard]] auto analyze_text() const -> TextStatistics;
 
    private:
-    [[nodiscard]] auto _count_words() const -> std::uint32_t;
-    [[nodiscard]] auto _count_lines() const -> std::uint32_t;
-    [[nodiscard]] auto _count_characters() const -> std::uint32_t;
+    [[nodiscard]] static auto _is_space(char chr) -> bool;
+    [[nodiscard]] auto _is_end_of_line(std::size_t charIndex) const -> bool;
 
     std::string _text;
 };
