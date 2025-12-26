@@ -47,7 +47,7 @@ TEST(TextAnalyzerTest, EmptyText)
     auto res = analyzer.analyze_text();
 
     EXPECT_EQ(res.characters_number, 0);
-    EXPECT_EQ(res.lines_number, 1);
+    EXPECT_EQ(res.lines_number, 0);
     EXPECT_EQ(res.words_number, 0);
 }
 
@@ -59,6 +59,16 @@ TEST(TextAnalyzerTest, OnlySpacesAndTabs)
     EXPECT_EQ(res.characters_number, 8);
     EXPECT_EQ(res.lines_number, 1);
     EXPECT_EQ(res.words_number, 0);
+}
+
+TEST(TextAnalyzerTest, OneLineWithoutNewlineCharacter)
+{
+    TextAnalyzer analyzer{"Hey"};
+    auto res = analyzer.analyze_text();
+
+    EXPECT_EQ(res.characters_number, 3);
+    EXPECT_EQ(res.lines_number, 1);
+    EXPECT_EQ(res.words_number, 1);
 }
 
 TEST(TextAnalyzerTest, MultipleLines)
