@@ -2,44 +2,31 @@
 
 #include <iostream>
 
-#include "config.h"
 #include "directory_analyzer.h"
-#include "directory_analyzer_one_thread.h"
 #include "timer.h"
 
-void Cli::analyzeDirectoryAndOutput(std::string directory_to_analyze)
+void Cli::printAnalyzingResultsForDirectory(const std::vector<FileStatistics>& stats,
+                                            const std::string& directory_to_analyze)
 {
-    DirectoryAnalyzer directory_analyzer{directory_to_analyze};
+    std::cout << "Analyzing directory: " << directory_to_analyze << '\n';
 
-    if (config::DEBUG)
+    for (const auto& file_stat : stats)
     {
-        std::cout << "Analyzing directory: " << directory_to_analyze << '\n';
-
-        DirectoryAnalyzerOneThread directory_analyzer_debug{std::move(directory_to_analyze)};
-
-        Timer benchmark_timer;
-
-        {
-            benchmark_timer.start();
-            auto directory_stats = directory_analyzer.analyze_dir();
-            benchmark_timer.stop();
-            std::cout << "Multithread version: " << benchmark_timer.formatted_elapsed_time()
-                      << '\n';
-        }
-
-        {
-            benchmark_timer.start();
-            auto directory_stats = directory_analyzer_debug.analyze_dir();
-            std::cout << "One thread version: " << benchmark_timer.formatted_elapsed_time() << '\n';
-            benchmark_timer.stop();
-        }
+        printAnalyzingResultsForFile(file_stat);
     }
-    else
-    {
-        std::cout << " " << directory_to_analyze << '\n';
-        for (const auto &file_stat : directory_analyzer.analyze_dir())
-        {
-            std::cout << "  " << file_stat.get_in_printable_format() << '\n';
-        }
-    }
+}
+
+void Cli::printAnalyzingResultsForFile(const FileStatistics& stats)
+{
+    std::cout << stats.get_in_printable_format() << '\n';
+}
+
+void Cli::printError(const std::exception& exception)
+{
+    std::cerr << "Error occurred: " << exception.what() << '\n';
+}
+
+void Cli::printMessage(const std::string& message)
+{
+    std::cout << message << '\n';
 }

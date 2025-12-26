@@ -1,23 +1,23 @@
-#include <exception>
-#include <iostream>
 #include <string>
+#include <vector>
 
-#include "cli.h"
-#include "config.h"
+#include "application.h"
 
-auto main(const int argc, char *argv[]) -> int
+auto parseArgs(const int argc, const char **argv) -> std::vector<std::string>
 {
-    try
+    std::vector<std::string> args;
+    args.reserve(argc - 1);
+
+    for (int i = 1; i < argc; ++i)
     {
-        std::string directory_to_analyze =
-            argc > 1 ? argv[1] : config::DEFAULT_PATH_FOR_ANALYZING;  // NOLINT
-        Cli::analyzeDirectoryAndOutput(std::move(directory_to_analyze));
-    }
-    catch (const std::exception &e)
-    {
-        std::cerr << e.what() << '\n';
-        return EXIT_FAILURE;
+        args.emplace_back(argv[i]);  // NOLINT
     }
 
-    return EXIT_SUCCESS;
+    return args;
+}
+
+auto main(const int argc, const char *argv[]) -> int
+{
+    const Application app(parseArgs(argc, argv));
+    return app.run();
 }
