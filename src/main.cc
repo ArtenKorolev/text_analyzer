@@ -3,7 +3,7 @@
 
 #include "application.h"
 
-auto parseArgs(const int argc, const char **argv) -> std::vector<std::string>
+auto parse_args(const int argc, const char *argv[]) -> std::vector<std::string>
 {
     std::vector<std::string> args;
     args.reserve(argc - 1);
@@ -18,6 +18,6 @@ auto parseArgs(const int argc, const char **argv) -> std::vector<std::string>
 
 auto main(const int argc, const char *argv[]) -> int
 {
-    const Application app(parseArgs(argc, argv));
+    const Application app(parse_args(argc, argv));
     return app.run();
 }

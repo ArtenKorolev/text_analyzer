@@ -18,7 +18,7 @@ void Cli::printAnalyzingResultsForDirectory(const std::vector<FileStatistics>& s
 
 void Cli::printAnalyzingResultsForFile(const FileStatistics& stats)
 {
-    std::cout << stats.get_in_printable_format() << '\n';
+    std::cout << stats.serialize() << '\n';
 }
 
 void Cli::printError(const std::exception& exception)

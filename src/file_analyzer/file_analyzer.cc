@@ -7,9 +7,9 @@ FileAnalyzer::FileAnalyzer(std::filesystem::path file_path)
 {
 }
 
-auto FileStatistics::get_in_printable_format() const -> std::string
+auto FileStatistics::serialize() const -> std::string
 {
-    return file_path + ": " + text_stats.get_in_printable_format();
+    return file_path + ": " + text_stats.serialize();
 }
 
 auto FileAnalyzer::analyze_file() const -> FileStatistics

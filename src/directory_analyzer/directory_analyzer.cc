@@ -15,8 +15,8 @@ DirectoryAnalyzer::DirectoryAnalyzer(std::filesystem::path dir_path)
 // TODO: replace with thread pool pattern
 auto DirectoryAnalyzer::analyze_dir() const -> std::vector<FileStatistics>
 {
-    DirectoryScanner scanner{_dir_path};
-    auto files{scanner.get_files()};
+    const DirectoryScanner scanner{_dir_path};
+    const auto files{scanner.get_files()};
 
     std::vector<FileStatistics> all_files_stats;
     all_files_stats.reserve(files.size());
@@ -33,7 +33,7 @@ auto DirectoryAnalyzer::analyze_dir() const -> std::vector<FileStatistics>
                 const FileAnalyzer analyzer{file};
                 auto file_data{analyzer.analyze_file()};
 
-                std::lock_guard<std::mutex> guard{mtx};
+                std::scoped_lock guard{mtx};
                 all_files_stats.emplace_back(file_data);
             });
     }

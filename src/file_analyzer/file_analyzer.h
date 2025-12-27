@@ -6,7 +6,7 @@
 
 struct FileStatistics
 {
-    [[nodiscard]] auto get_in_printable_format() const -> std::string;
+    [[nodiscard]] auto serialize() const -> std::string;
 
     TextStatistics text_stats;
     std::string file_path;
