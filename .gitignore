@@ -7,3 +7,4 @@ bin/
 .cache/
 .DS_Store
 *.sw
+compile_commands.json
