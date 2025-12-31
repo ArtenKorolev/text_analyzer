@@ -2,7 +2,6 @@
 
 #include <iostream>
 
-#include "directory_analyzer.h"
 #include "timer.h"
 
 void Cli::printAnalyzingResultsForDirectory(const std::vector<FileStatistics>& stats,
