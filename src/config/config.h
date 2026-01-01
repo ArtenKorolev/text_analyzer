@@ -1,6 +1,8 @@
 #ifndef _CONFIG_H_
 #define _CONFIG_H_
 
+#include <string_view>
+
 namespace config
 {
 
@@ -12,7 +14,7 @@ constexpr auto DEBUG =
     false;
 #endif
 
-constexpr auto DEFAULT_PATH_FOR_ANALYZING = ".";
+constexpr std::string_view DEFAULT_PATH_FOR_ANALYZING = ".";
 
 }  // namespace config
 

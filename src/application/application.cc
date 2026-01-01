@@ -5,6 +5,7 @@
 #include "cli.h"
 #include "config.h"
 #include "directory_analyzer.h"
+#include "directory_analyzer_async.h"
 #include "directory_analyzer_one_thread.h"
 #include "file_analyzer.h"
 #include "timer.h"
@@ -74,10 +75,11 @@ void Application::_run_debug_benchmarking(const fs_path &analyzing_target)
     Cli::printMessage(
         "You see this output because the program was built in debug mode.\n"
         "It is intended to show the difference between the \n"
-        "single-threaded and multithreaded versions.\n");
+        "single-threaded, multithreaded and async versions.\n");
 
     const DirectoryAnalyzer directory_analyzer{analyzing_target};
     const DirectoryAnalyzerOneThread directory_analyzer_one_thread{analyzing_target};
+    const DirectoryAnalyzerAsync directory_analyzer_async{analyzing_target};
     Timer timer;
 
     {
@@ -86,6 +88,14 @@ void Application::_run_debug_benchmarking(const fs_path &analyzing_target)
         timer.stop();
 
         Cli::printMessage("Multithread version: " + timer.formatted_elapsed_time());
+    }
+
+    {
+        timer.start();
+        const auto result = directory_analyzer_async.analyze_dir();
+        timer.stop();
+
+        Cli::printMessage("Async version: " + timer.formatted_elapsed_time());
     }
 
     {
@@ -103,8 +113,8 @@ void Application::_run_file_analyzing(const fs_path &analyzing_target)
     {
         Cli::printMessage(
             "You will not see debug output here because a single file is processed\n"
-            "in one thread, and there is no difference between the single-threaded\n"
-            "and multithreaded versions.\n");
+            "in one thread, and there is no difference between the single-threaded, multithreaded\n"
+            "and async versions.\n");
     }
 
     const FileAnalyzer file_analyzer{analyzing_target};
