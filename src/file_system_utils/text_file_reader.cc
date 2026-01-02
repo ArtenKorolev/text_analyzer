@@ -1,7 +1,7 @@
 #include "text_file_reader.h"
 
 #include <fstream>
-#include <sstream>
+#include <iterator>
 #include <stdexcept>
 
 TextFileReader::TextFileReader(std::filesystem::path file_path) : _file_path{std::move(file_path)}
@@ -17,8 +17,8 @@ auto TextFileReader::read() const -> std::string
         throw std::runtime_error("Unable to open file: " + _file_path.string());
     }
 
-    std::stringstream str_stream{};
-    str_stream << file_stream.rdbuf();
+    const auto file_contents =
+        std::string{std::istreambuf_iterator<char>(file_stream), std::istreambuf_iterator<char>()};
 
-    return str_stream.str();
+    return file_contents;
 }
