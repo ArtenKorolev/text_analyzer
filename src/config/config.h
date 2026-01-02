@@ -12,6 +12,8 @@ constexpr auto DEBUG =
     true;
 #elif defined(BUILD_RELEASE)
     false;
+#else
+#error "Unknown build type"
 #endif
 
 constexpr std::string_view DEFAULT_PATH_FOR_ANALYZING = ".";
