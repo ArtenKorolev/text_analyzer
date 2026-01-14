@@ -24,7 +24,7 @@ auto DirectoryAnalyzerAsync::analyze_dir() const -> std::vector<FileStatistics>
     for (const auto &file : files)
     {
         tasks.emplace_back(std::async(std::launch::async,
-                                      [&file]() -> FileStatistics
+                                      [file]() -> FileStatistics
                                       {
                                           const FileAnalyzer analyzer{file};
                                           auto file_data{analyzer.analyze_file()};
